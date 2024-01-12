@@ -1,4 +1,4 @@
-##Food Order App
+## Food Order App
 
 **Steps to run**
 1. npm install @ root folder
