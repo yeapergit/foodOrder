@@ -1,31 +1,45 @@
 import React, { ReactNode, createContext, useContext, useState } from 'react';
 
 interface HistoryContextType {
-  orderIds: Array<string>,
   names: Array<string>,
   hideHistory: () => void
-  showHistory: () => void
+  showHistory: (items: string[]) => void
 }
 
-const HistoryContext = createContext<HistoryContextType>({
-  orderIds: [],
+const historyContextObject = {
   names: [],
-  hideHistory: () => {},
-  showHistory: () => {}
-})
+  hideHistory: () => { },
+  showHistory: () => { }
+}
 
-  export const HistoryContextProvider: React.FC<{children: ReactNode}> = ({ children }) => {
+const HistoryContext = createContext<HistoryContextType>(historyContextObject)
 
-    const historyContext = {
-      orderIds: [],
-      names: [],
-      hideHistory: () => {},
-      showHistory: () => {}
+export const HistoryContextProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const [orderIds, setItems] = useState<Array<string>>([]);
+
+  const showHistory = (items: any[]) => {
+    if (items) {
+      const itemsIds = items.map(x => { return x.id })
+      setItems(itemsIds);
+      console.log({ orderIds })
     }
-
-    return (
-      <HistoryContext.Provider value={historyContext}>
-        {children}
-      </HistoryContext.Provider>
-    )
   }
+
+  function hideHistory(){
+    console.log("hide")
+  }
+
+  const historyContext: HistoryContextType = {
+    names: [],
+    hideHistory,
+    showHistory
+  }
+
+  return (
+    <HistoryContext.Provider value={historyContext}>
+      {children}
+    </HistoryContext.Provider>
+  )
+}
+
+export default HistoryContext;
