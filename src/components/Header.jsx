@@ -3,6 +3,7 @@ import logo from "../assets/logo.jpg";
 import Button from "./UI/Button";
 import CartContext from "../store/CartContext";
 import UserProgressContext from "../store/UserProgressContext";
+import ButtonV2 from "./UI/ButtonV2";
 
 export default function Header() {
   const cartContext = useContext(CartContext);
@@ -26,6 +27,7 @@ export default function Header() {
         <h1>Food Order App</h1>
       </div>
       <nav>
+        <ButtonV2>TBD</ButtonV2>
         <Button textOnly onClick={handleShowCart}>
           Cart ({totalCartItems}){" "}
         </Button>
